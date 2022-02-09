@@ -48,6 +48,7 @@ int main(){
    //Test copy_str method
    char* temp_test = copy_str(words,len,delimeter);
    printf("Copy Test:%s \n",temp_test);
+   printf("Your git commands are working now!\n");
 
   //end of the program
   return 0;
