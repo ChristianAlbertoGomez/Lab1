@@ -203,7 +203,23 @@ char *copy_str(char *inStr, short len, char delim)
 */
 char** tokenize(char* str, char delim)
 {
+  /*
+    For this method we have to do 2 principal steps:
+    1) Declare a char** variable using malloc.
+    2) Declare a variable to know how many words do we have in the String.
+    2.2) We have to avoid delimeter. Then we use count_tokens method as size.
 
+    Edwin helped me to undestand much better what char** does.
+  */
+
+   int total_tokens = count_tokens(str,delim);
+   char** temp_tokenizer = malloc((total_tokens+1)*(char*));
+
+   int i; // for loop
+   for(i=0;str[i]!='\0';i++){
+     if(){
+     }
+   }
 }
 
 void print_all_tokens(char** tokens)
