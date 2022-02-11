@@ -10,6 +10,8 @@ char* word_start(char *str,char delimeter);
 char* end_word(char *str,char delimeter);
 int count_tokens(char* str,char delim);
 char *copy_str(char *inStr, short len, char delim);
+char** tokenize(char* str,char delim);
+void print_all_tokens(char** tokens);
 
 /*
   First we are going to create the main menu.
@@ -50,6 +52,10 @@ int main(){
    printf("Copy Test:%s \n",temp_test);
    printf("Your git commands are working now!\n");
 
+   //Test tokenizer program
+   char** temp_tokenize = tokenize(words,delimeter);
+   print_all_tokens(temp_tokenize);
+
   //end of the program
   return 0;
 }
@@ -64,6 +70,16 @@ int strlength(char *words){
  }
   return len;
 }
+
+int length(char* str,char delim) 
+{
+  char* start = word_start(str,delim);
+  char* end = end_word(str,delim);
+  int len = end-start;
+  return len;
+}
+
+
 /* Return true (non-zero) if c is the delimiter character
    previously chosen by the user.
    Zero terminators are not printable (therefore false) */
@@ -180,7 +196,7 @@ char *copy_str(char *inStr, short len, char delim)
   //We use len+1 to take in count the '\0' at the end of a string.
   //To copy correctly we need malloc. Sizeof will tell us the size
   // capacity of a char*.
-   char* temp_inStr = malloc((len+1)*sizeof(char*));
+   char* temp_inStr = malloc((temp_len+1)*sizeof(char*));
 
    //Next thing is copy each index of inStr into the temp_inStr.
    int i; //for loop
@@ -213,16 +229,28 @@ char** tokenize(char* str, char delim)
   */
 
    int total_tokens = count_tokens(str,delim);
-   char** temp_tokenizer = malloc((total_tokens+1)*(char*));
+   char** temp_tokenizer = malloc((total_tokens+1)*sizeof(char*));
+   int i;
+   int len;
 
-   int i; // for loop
-   for(i=0;str[i]!='\0';i++){
-     if(){
-     }
+   for(i=0;i<total_tokens;i++){
+     str = word_start(str,delim);
+     len = length(str,delim);
+     temp_tokenizer[i] = copy_str(str,len,delim);
+     str = end_word(str,delim);
    }
+   temp_tokenizer[i]='\0';
+   return temp_tokenizer;
 }
 
 void print_all_tokens(char** tokens)
 {
+  int counter = 0;
+  char** temp_tokens = tokens;
 
+  while(*temp_tokens){
+    printf("Token[%d]: %s \n",counter,*temp_tokens);
+    counter++;
+    temp_tokens++;
+  }
 }
