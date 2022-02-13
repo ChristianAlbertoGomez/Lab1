@@ -39,6 +39,7 @@ int main(){
    //Test word_start method
    char *test = word_start(words,delimeter);
    printf("word_start test:%c \n",*test);
+
    //Test word_end method
    char *test2 = end_word(words,delimeter);
    printf("word_end test:%c \n",*test2);
@@ -50,7 +51,6 @@ int main(){
    //Test copy_str method
    char* temp_test = copy_str(words,len,delimeter);
    printf("Copy Test:%s \n",temp_test);
-   printf("Your git commands are working now!\n");
 
    //Test tokenizer program
    char** temp_tokenize = tokenize(words,delimeter);
@@ -70,7 +70,9 @@ int strlength(char *words){
  }
   return len;
 }
-
+/*
+  This method will help us to know the length of a token.
+*/
 int length(char* str,char delim) 
 {
   char* start = word_start(str,delim);
@@ -230,16 +232,23 @@ char** tokenize(char* str, char delim)
 
    int total_tokens = count_tokens(str,delim);
    char** temp_tokenizer = malloc((total_tokens+1)*sizeof(char*));
-   int i;
-   int len;
+   int i; //i is used in our for loop.
+   int len; //len will be used to know the str size of the word.
 
+   /*First we use a for loop we a range of total tokens we have in our str*/
    for(i=0;i<total_tokens;i++){
+     //We use word_start to know when our word start.
      str = word_start(str,delim);
+     //length method will tell us how long is the first token.
      len = length(str,delim);
+     //We store each copy token inside of our tokenizer.
      temp_tokenizer[i] = copy_str(str,len,delim);
+     //This sentences means that we are going to move to the next token.
      str = end_word(str,delim);
    }
+   //At the end we must input '\0'.
    temp_tokenizer[i]='\0';
+
    return temp_tokenizer;
 }
 
